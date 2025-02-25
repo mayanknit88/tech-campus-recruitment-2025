@@ -6,8 +6,15 @@ def extract_logs(log_file, date):
         print("Error: Log file not found.")
         return
     
-    os.makedirs("output", exist_ok=True)
-    output_file = f"output/output_{date}.txt"
+    # os.makedirs("output", exist_ok=True).
+    script_dir = os.path.dirname(os.path.abspath(_file_))  # Get script location
+    parent_dir = os.path.dirname(script_dir)  # Move to parent directory
+    output_dir = os.path.join(parent_dir, "output") 
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    output_file = os.path.join(output_dir, f"output_{target_date}.txt")
+
     
     with open(log_file, "r") as infile, open(output_file, "w") as outfile:
         for line in infile:
